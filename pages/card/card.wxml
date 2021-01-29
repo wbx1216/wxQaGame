@@ -1,0 +1,37 @@
+<view class="content">
+   <view class="card">
+   <image src="../../image/cardBg.png" mode="widthFix" class="cardBg"></image>
+   <view class="cardNum">{{cardNum}}</view>
+   <view class="text">我的答题卡（张）</view>
+   <view class="cover"></view>
+   <view class="info">
+     <view>签到：{{checkIn}}</view>
+     <view>邀请：0</view>
+     <view>答对：{{successAnswer}}</view>
+     <view class="line"></view>
+     <view class="line" style="left:66%"></view>
+   </view> 
+   </view>
+   <view class="renwu">
+     <view class="title">每日任务（领答题卡）</view>
+     <block>
+      <view class="item" wx:for="{{list}}"  wx:key="idx" wx:for-index="idx"  wx:for-item="item">
+        <view class="flex">
+          <image mode="widthFix" src="../../image/item{{idx}}.png"></image>
+          <view>
+            <view class="name">{{item.name}}</view>
+            <view class="des">{{item.des}}</view>
+          </view>
+        </view>
+        
+        <view class="button" data-idx="{{idx}}" bindtap="go"  >{{item.button}}
+          <button open-type="share" wx:if="{{idx==0}}" class="share"></button>
+        </view>
+      </view>
+    </block>
+   </view>
+   <!-- <view class="renwu">
+     
+    <view class="title">试玩小程序</view>
+   </view> -->
+</view>

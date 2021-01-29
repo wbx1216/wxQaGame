@@ -1,0 +1,91 @@
+<!--index.wxml-->
+<view class="container">
+  <scroll-view class="topAd" scroll-x="true">
+    <view wx:for="{{list}}" class="item" wx:key="idx" wx:for-index="idx" wx:for-item="itemName">
+      <image src="../../image/icon.png" mode="widthFix"></image>
+      <view>成语小秀才</view>
+    </view>
+  </scroll-view>
+  <view class="userInfo">
+    <view class="userInfo2">
+      <view class="flex">
+        <view class="userIcon">
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+        <view style="font-size:18px;">余额：<text style="color:#fe4725">{{cash}}</text>元</view>
+      </view>
+      <view class="button"  >立刻提现</view>
+      <button open-type="getUserInfo" class="button2" bindgetuserinfo="bindGetUserInfo" />
+    </view>
+    <view class="loading">
+      <view class="loadingIndex" style="width:{{width}}%"></view>
+    </view>
+    <view class="flex" style="justify-content: space-between;font-size:24rpx;margin-top:10rpx;">
+      <view style="color:rgba(0,0,0,0.3)">余额满20元，可直接提现到微信钱包</view>
+      <view style="color:#ff7a1b;">¥{{loadingDollar}}</view>
+    </view>
+  </view>
+  <view class="index">
+    <view class="content">
+      <image src="../../image/background.png" mode="widthFix" style="width:100%"></image>
+      <view class="totalDollar"><text style="font-size:44rpx;font-weight:bold"> {{totalDollar}}</text>元</view>
+      <view class="totalBag">剩余{{totalBag}}个红包</view>
+      <view class="lastTime">{{time}}</view>
+      <view class="qa">
+        <view class="question">{{question}}</view>
+        <view class="answer" wx:for="{{text}}"  bindtap="answer" data-id="{{idx}}" wx:key="idx" wx:for-index="idx" wx:for-item="item">{{item}}</view> 
+      </view>
+      <view class="card">答题卡：{{card}}张</view>
+      <view  bindtap="card" class="cardButton">领取答题卡</view>
+    </view>
+    <view class="ad">
+      <image src="../../image/bannerAd.png" style="width:95%;margin-left:2.5%" mode="widthFix"></image>
+    </view>
+    <view class="renwu">
+      <view class="title">累计答对题目：{{num}}题</view>
+      <scroll-view class="renwuList" scroll-x="true">
+        <view wx:for="{{renwulist}}" class="renwuItem" wx:for-index="idx" data-id="{{idx}}" bindtap="ling" wx:for-item="item">
+          <view class="renwuImg" style="background-image:url({{item.url}})"  >
+            <view class="text" >
+              <view>累计答对</view>
+              <view>{{item.old}}题可开</view>
+            </view>
+          </view>
+          <view class="renwuButton"  wx:if="{{item.status==0}}">再答{{item.num}}题</view>
+          <view class="renwuButton unget"  wx:elif="{{item.status==1}}">领取</view>
+          <view class="renwuButton"  wx:elif="{{item.status==2}}">已领取</view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="rank">
+      <image src="../../image/rankTitle.png" style="width:100%" mode="widthFix"></image>
+      <view class="rankList">
+        <view class="rankItem" wx:for="{{rankList}}" wx:key="idx" wx:for-index="idx" wx:for-item="item">
+          <view class="flex">
+            <image wx:if="{{idx<3}}" src="../../image/num{{idx+1}}.png" class="rankTitle" mode="widthFix"></image>
+            <view class="rankTitle" wx:else>{{idx+1}}</view>
+            <image src="../../image/icon.png"  style="width:70rpx;" mode="widthFix"></image>
+            <view style="margin-left:20rpx;font-weight:550">
+              <view>{{item.name}}</view>
+              <view style="color:#fe4725;">累计答对{{item.num}}题</view>
+            </view>
+          </view>
+          <view style="color:#fe4725">{{item.dollar}}元</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="newReward" wx:if="{{first}}" >
+  <view style="background-image:url({{url}})"   class="redBag"     bindtap="open"> 
+    <image src="../../image/close.png" mode="widthFix"  class="close" bindtap="close2"></image>
+    <view class="reward" wx:if="{{opened}}">{{rookieCash}}<text style="font-size:48rpx;font-weight:100">元</text></view>
+  </view>  
+</view>
+<view class="wrong" wx:if="{{alert}}" bindtap="close">
+  <view  wx:if="{{right}}" class="right">
+    <view class="dollar">{{dollar}}</view>
+  </view>  
+  <image src="../../image/wrong.png" mode="widthFix" wx:else class="wrongImg"></image>
+  <image src="../../image/close.png" mode="widthFix"  class="close" ></image>
+</view>  

@@ -1,0 +1,124 @@
+.content{
+  background: #ededed;
+}
+.card{
+  width:95%;
+  margin-left: 2.5%;
+  padding-top: 35rpx;
+  margin-bottom: 35rpx;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.cardBg{
+  width: 100%;
+  display: block;
+}
+.cardNum{
+  position: absolute;
+  top:60rpx;
+  text-align: center;
+  margin:auto;
+  left:0;
+  right:0;
+  font-size: 48rpx;
+  color:#FFF;
+}
+.text{
+  position: absolute;
+  top:120rpx;
+  text-align: center;
+  margin:auto;
+  left:0;
+  right:0;
+  font-size: 28rpx;
+  color:#FFF;
+}
+.cover{
+  position: absolute;
+  width: 100%;
+  bottom:0;
+  background: rgba(0,0,0,0.2);
+  height: 74rpx;
+  z-index: 6;
+}
+
+.info{
+  line-height: 74rpx;
+  position: absolute;
+  width: 100%;
+  bottom:0;
+  display: flex; 
+  z-index: 7;
+}
+.info view{
+  flex:1;
+  text-align: center;
+  color:#FFF;
+}
+.line{
+  position: absolute;
+  height: 33rpx;
+  width: 1px;
+  background: #fff;
+  left:33%;
+  bottom:0;
+  top:0;
+  margin:auto;
+}
+.renwu{
+  width:90%;
+  margin-left: 2.5%;
+  background: #FFF;
+  border-radius: 4px;
+  padding:50rpx 2.5%;
+  margin-right: 2.5%;
+  margin-bottom: 35rpx;
+}
+.title{
+  text-align: center;
+  font-weight: 550;
+}
+.item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin:50rpx auto;
+}
+.item image{
+  width: 65rpx;
+  display: block;
+  margin-right: 24rpx;
+}
+.flex{
+  display: flex; 
+  align-items: center;
+}
+.name{
+  font-size: 28rpx;
+}
+.des{
+  font-size: 24rpx;
+  opacity: 0.5;
+}
+.button{
+  width:180rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color:#FFF;
+  font-size: 26rpx;
+  border-radius: 40rpx;
+  background:linear-gradient(to right,rgb(254,46,41),rgb(255,128,26));
+  position: relative;
+}
+.share{
+  position: absolute;
+  width:80px !important;
+  height: 100%;
+  right:0;
+  top:0;
+  background: none;
+  z-index: 999;
+  opacity: 0
+}

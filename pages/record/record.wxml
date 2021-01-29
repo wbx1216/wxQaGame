@@ -1,0 +1,10 @@
+ <view class="list">
+  <view class="item" wx:for="{{list}}" wx:key="idx" wx:for-index="idx" wx:for-item="item">
+    <view>
+      <view class="name">{{item.name}}</view>
+      <view class="time">{{item.time}}</view>
+    </view>
+    <view  class="num">+{{item.num}}</view>
+  </view>
+ </view>
+ 

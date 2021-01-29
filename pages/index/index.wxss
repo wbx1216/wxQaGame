@@ -1,0 +1,313 @@
+/**index.wxss**/
+.topAd{ 
+  font-size: 24rpx;
+  color:#FFF; 
+  background-image: linear-gradient(to top, rgb(43,187,255) , rgb(35,139,254));
+  height: 140rpx; 
+  width: 95%;
+  white-space: nowrap;
+ padding:2.5%;
+}
+.topAd .item{
+  width: 150rpx;
+  display:inline-block;
+  height: 140rpx ; 
+  text-align: center;
+}
+.topAd .item image{
+  width:100rpx;
+  margin:0 auto;
+}
+.userInfo{
+  height: 200rpx;
+  padding:30rpx 0rpx;
+  width: 95%;
+  padding-left:2.5%;
+  padding-right:2.5%;
+}
+.userInfo2{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.flex{
+  display: flex; 
+  align-items: center;
+}
+.userIcon{
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+.button{
+  background-image:linear-gradient(to right,  rgb(254,46,41) ,rgb(255,128,26) );
+    width: 160rpx;
+    height: 50rpx; 
+    line-height: 50rpx;
+    text-align: center;
+    border-radius: 10px;
+    color:#FFF;
+    font-size: 13px;
+    position: relative;
+}
+.button2{
+  position: absolute;
+  width:80px !important;
+  height: 100%;
+  right:0;
+  top:0;
+  background: none;
+  z-index: 999;
+  opacity: 0
+}
+.loading{
+  width:100%;
+  background: rgba(0,0,0,.1);
+  height: 14rpx;
+  border-radius: 40px;
+  position: relative;
+  margin-top:20rpx;
+  overflow: hidden;
+}
+.loadingIndex{
+  height: 100%;
+  position: absolute;
+  top:0;
+  left:0;
+  background: #ff7a1b;
+}
+.index{
+  background: #ededed; 
+}
+.content{ 
+  position: relative;
+  width: 750rpx;
+  height: 875rpx;
+}
+.totalDollar{
+  position: absolute;
+  right: 141rpx;
+  top:40rpx;
+  color:#e95919;
+  font-size: 30rpx;
+}
+.totalBag{
+  position: absolute;
+  right: 120rpx;
+  top:100rpx;
+  color:#e95919;
+  font-size: 26rpx;
+}
+.lastTime{
+  font-size: 82rpx;
+  position: absolute; 
+  top:182rpx;
+  color:#FFF;
+  font-weight: bold;
+  text-align: center;
+  left:0;
+  right:28rpx;
+}
+.qa{
+  position: absolute;
+  width: 500rpx;
+  left:0;
+  right:0;
+  margin:auto;
+  top:400rpx;
+  bottom:0;
+  font-size:32rpx;
+  font-weight: 540;
+}
+.question{
+  margin-bottom: 40rpx;
+}
+.answer{
+  background-color:rgba(0,0,0,0.08);
+  width:100%;
+  line-height:70rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  margin-bottom:30rpx;
+}
+.card{
+  position: absolute;
+  bottom:64rpx;
+  left:150rpx;
+}
+.cardButton{
+    background:linear-gradient(to right,rgb(254,46,41),rgb(255,128,26));
+    padding:4rpx 20rpx;
+    width:140rpx;
+    height: 50rpx; 
+    line-height: 50rpx;
+    text-align: center;
+    border-radius: 10px;
+    color:#FFF;
+    font-size: 13px;
+    position: absolute;
+    bottom:60rpx;
+    right:80rpx;
+}
+ 
+.renwu{
+  width:95%;
+  margin:30rpx auto;
+  background: #FFF;
+}
+.title{
+  text-align: center;
+  line-height: 100rpx;
+  font-weight: 550;
+  font-size: 30rpx;
+}
+.renwuList{
+  background: #FFF;
+  white-space:nowrap;
+  width:95%; 
+  height: 280rpx; 
+}
+.renwuItem{
+  width: 20%;
+  display: inline-block;
+  height: 250rpx;
+  padding:0 2.5%;
+}
+.renwuImg{
+  background:  no-repeat;
+  width: 150rpx;
+  height: 180rpx;
+  background-size: 100% 100%;
+  text-align: center; 
+}
+.text{
+  color:#ffe47e;
+  font-size: 22rpx;
+  padding-top: 110rpx;
+}
+.renwuButton{
+  color:#ffffff;
+  font-size: 22rpx;
+  background:rgba(0,0,0,0.2);
+  text-align: center;
+  line-height: 40rpx;
+  margin-top:20rpx;
+  border-radius: 40rpx;
+}
+.rank{
+  width:95%;
+  margin-left:2.5%;
+  border-radius: 10rpx;
+  background-color: #FFf;
+}
+.rankList{
+  width:95%;
+  margin-left:2.5%;
+}
+.rankItem{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+  padding:32rpx 0px;
+}
+.rankTitle{
+  width:40rpx;
+  margin:0px 15rpx;
+  text-align: center;
+}
+.newReward{
+  width:100%;
+  height: 100%;
+  position:fixed;
+  background-color: rgba(0,0,0,0.7);
+  top:0;
+  left:0;
+}
+.redBag{
+  width:560rpx;
+  display:block;
+  position: absolute;
+  height: 740rpx;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  left:0;
+  right:0;
+  bottom:0;
+  top:0;
+  margin:auto;
+}
+.close{
+  width: 60rpx;
+  display:block;
+  position: absolute;
+  left:0;
+  right:0;
+  bottom:-100rpx; 
+  margin:auto;
+}
+.reward{ 
+  color:#fe4725;
+  width: 100%;
+  display:block;
+  position: absolute;
+  left:0;
+  right:0;
+  top:200rpx; 
+  margin:auto;
+  font-size: 100rpx;
+  font-weight: 550;
+  text-align: center;
+}
+.wrong{
+  width:100%;
+  height: 100%;
+  position:fixed;
+  background-color: rgba(0,0,0,0.7);
+  top:0;
+  left:0;
+}
+.wrongImg{
+  width:560rpx;
+  display:block;
+  position: absolute;
+  left:0;
+  right:0;
+  margin:auto;
+  bottom:0;
+  top:0;
+
+}
+.wrong .close{
+  bottom:0px;
+  top:650rpx;
+}
+.right{
+  width:621rpx;
+  display:block;
+  position: absolute;
+  height: 642rpx;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  left:0;
+  right:0;
+  bottom:150rpx;
+  top:0;
+  margin:auto;
+  background-image: url(http://res.hodanet.com/upload/sy/20210027/16/1611735866340.png);
+}
+.right .dollar{
+  font-size: 46rpx;
+  color:#fe4725;
+  margin-left: 20rpx;
+  margin-top: 351rpx;
+  text-align: center;
+  width:621rpx;
+}
+
+.unget{
+  background: #f5c942;
+}

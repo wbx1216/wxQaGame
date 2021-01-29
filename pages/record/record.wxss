@@ -1,0 +1,21 @@
+.item{
+  display: flex;
+  height: 140rpx;
+  justify-content: space-between;
+  align-items: center;
+  width:90%;
+  padding:0% 5%;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.num{
+  color:#fe2e29;
+  font-size: 26rpx;
+}
+.name{
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+.time{
+  font-size: 24rpx;
+  opacity: 0.5;
+}

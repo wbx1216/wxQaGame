@@ -1,0 +1,17 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/checkIn/checkIn",
+    "pages/pay/pay",
+    "pages/record/record",
+    "pages/card/card"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#238bfe",
+    "navigationBarTitleText": "每日答题赚钱|真实可提现",
+    "navigationBarTextStyle":"white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

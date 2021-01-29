@@ -1,0 +1,28 @@
+<!--logs.wxml-->
+<view style="height:100vh;background:#ededed"  >
+ <view class="top">
+  <view class="text">已坚持<view class="item" wx:for-index="idx" wx:for="{{array}}" wx:key="idx" wx:item="item">{{item}}</view>天签到</view>
+  <view class="button">
+    <image src="../../image/dollar.png" mode="widthFix" style="width:40rpx"></image>
+    签到7天，即可开启神秘大礼
+  </view>
+ </view>
+ <view class="checkBlock"> 
+    <view class="flex">
+    <view class="checkItem {{item.checked?'checked':''}}" wx:for="{{checkList}}" wx:for-index="idx" wx:key="idx" wx:item="item" wx:if="{{idx<6}}" >
+      <view>第{{item.day}}天</view>
+      <image src="../../image/redBag.png" style="width:60rpx;" mode="widthFix"></image>
+      <view>答题卡+{{item.day}}</view>
+    </view>
+    <view class="bigGift {{checkList[6].checked?'checked':''}}">
+      <view>
+        <view>第7天</view>
+        <view>神秘大礼</view>
+      </view>
+      <image src="../../image/bigGift.png" mode="widthFix" style="width:95rpx;"></image>
+    </view>
+  </view>
+  <view class="button2" wx:if="{{!isClock}}" bindtap="checkIn">立刻签到</view>
+  <view class="button2" wx:else>已签到</view>
+ </view>
+</view>
