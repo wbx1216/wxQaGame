@@ -5,7 +5,7 @@
    <view class="text">我的答题卡（张）</view>
    <view class="cover"></view>
    <view class="info">
-     <view>签到：{{checkIn}}</view>
+     <view>签到：{{clockDay}}</view>
      <view>邀请：0</view>
      <view>答对：{{successAnswer}}</view>
      <view class="line"></view>

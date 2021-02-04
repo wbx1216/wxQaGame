@@ -26,6 +26,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    requestLink:"https://mina.jumengylh.com/doc/"
+     requestLink:"https://mina.jumengylh.com/doc/"
+    //requestLink:"http://192.168.20.2:50020/doc/"
   }
 })

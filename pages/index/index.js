@@ -1,16 +1,18 @@
 // index.js
-// 获取应用实例
-let Interval = null
+// 获取应用实例 
 const app = getApp()
 Page({
   data: {
-    list: [1, 2, 3, 4],
-    cash: "0.0",
+    list: [],
+    Interval:"",
+    bagInterval:"",
+    dollarInterval:"",
+    cash: "0",
     width: "0",
-    totalBag: "16118",
+    totalBag: "1611",
     lastId: 0,
     loadingDollar: "20",
-    totalDollar: "11417",
+    totalDollar: "1141",
     time: "9",
     card: "0",
     num: 0,
@@ -61,41 +63,42 @@ Page({
       old: 150
     }],
     first: false,
+    renwu: false,
     opened: false,
+    wrong:false,
     alert: false,
     right: false,
+    cardAlert:false,
     url: "http://res.hodanet.com/upload/sy/20210019/18/newReward.png",
     rookieCash: "1.23",
-    rankList: [{
-      name: "念安",
-      num: 324,
-      dollar: 200
-    }, {
-      name: "念安",
-      num: 324,
-      dollar: 200
-    }],
-    masterId: ""
+    rankList: [],
+    masterId: "",
+    getRank:false,
+    lastQuestionId:"",
+    oldList:[5,10,25,40,60,80,100,130,150]
   },
   // 事件处理函数
   onHide() {
-    clearInterval(Interval)
+    clearInterval(this.data.Interval)  
+    clearInterval(this.data.totalInterval)  
+    clearInterval(this.data.dollarInterval)  
   },
   onShow() {
+    let that=this
     wx.showLoading({
       title: '',
     })
     if (app.globalData.openId) {
-      this.getInfo()
-      wx.hideLoading()
+      this.getInfo(1)
+      wx.hideLoading() 
     } else {
       app.checkLoginReadyCallback = res => {
-        this.getInfo()
-        wx.hideLoading()
+        this.getInfo(1)
+        wx.hideLoading() 
       };
-    }
+    } 
   },
-  getInfo() {
+  getInfo(e) {
     if (!app.globalData.openId) {
       console.log("null")
       return false;
@@ -112,6 +115,7 @@ Page({
       if (userId) {
         data.userId = userId
       }
+      console.log(data)
       wx.request({
         url: app.globalData.requestLink+'user/getUserInfo.htm',
         data: data,
@@ -121,11 +125,11 @@ Page({
           console.log(res)
           let data = res.data.DATA
           let renwulist = that.data.renwulist
+          console.log(renwulist)
           renwulist.forEach((item, idx) => {
-            item.num = item.num - data.successAnswer
+            item.num = item.old - data.successAnswer
             renwulist[idx] = item
-          })
-
+          }) 
           if (data) {
             let successAnswer=null 
             for(let i=0;i<9;i++){ 
@@ -134,23 +138,22 @@ Page({
                 break; 
               }
             } 
+           
             let answerWelfare = data.answerWelfare
             if (successAnswer > 0) {
               if (!answerWelfare) {
                 for (let i = 0; i < successAnswer; i++) {
                   renwulist[i].status = 1
                 }
-              } else {
-                let len = answerWelfare.length
-                for (let i = 0; i < successAnswer; i++) {
-                  if (i < len) {
-                    renwulist[i].status = 2
-                  } else {
-                    renwulist[i].status = 1
-                  }
-                  renwulist[i].url = "http://res.hodanet.com/upload/sy/20210028/20/1611836541788.png"
-
+              } else { 
+                for (let i = 0; i < successAnswer; i++) { 
+                  renwulist[i].status = 1 
+                  renwulist[i].url = "http://res.hodanet.com/upload/sy/20210028/20/1611836541788.png" 
                 }
+                answerWelfare.forEach(item=>{
+                  let index=that.data.oldList.indexOf(item)
+                  renwulist[index].status = 2
+                })
               }
             }
             let loadingDollar = 20
@@ -173,13 +176,21 @@ Page({
                 first: true
               })
             }
-            app.globalData.userId = data.userId
+            app.globalData.userId = data.userId 
             wx.setStorage({
               key: "userId",
               data: data.userId
             })
+            if(!that.data.getRank){
+              that.getUserWithdrawRank()
+              that.setData({
+                getRank: true
+              })
+            }
           }
-          that.getQ()
+          if(e>-1){
+            that.getQ()
+          } 
         }
       })
     }
@@ -229,64 +240,66 @@ Page({
           idx: idx,
           totalDollar:res.data.welfareData.leftCash,
           totalBag:res.data.welfareData.leftNum
-        })
-        clearInterval(Interval)
-        that.timeLeft()
+        })  
+         that.timeLeft2()
+         that.timeLeft()
       }
     })
   },
-  answer(e) {
+  answer(e) { 
     let card = this.data.card
     let that = this
     if (card == 0) {
-      wx.showToast({
-        title: '答题卡0',
-        duration: 2000
+      this.setData({
+        cardAlert:true,
+        alert:true
       })
+      clearInterval(this.data.Interval)
       return false
     } else {
+      clearInterval(this.data.Interval)
       card = card - 1
-    }
-    let questionId = this.data.questionId
-    let ret = null
-    let opt = this.data.text[e.currentTarget.dataset.id]
-    if (e.currentTarget.dataset.id == this.data.rightIdx) {
-      ret = 1
-    } else {
-      ret = 0
-    }
-    let data = {
-      appId: 11,
-      userId: app.globalData.userId,
-      questionId: questionId,
-      ret: ret,
-      opt: opt
-    }
-    console.log(data)
-    wx.request({
-      url: app.globalData.requestLink+'quiz/userQuizReport.htm',
-      data: data,
-      method: "post",
-      dataType: "json",
-      success(res) {
-        console.log(res)
-        let data = res.data.DATA
-        if (ret == 1) {
-          that.setData({
-            alert: true,
-            right: true,
-            dollar: data.questionCash
-          })
-        } else {
-          that.setData({
-            alert: true,
-            right: false
-          })
-        }
-        that.getInfo()
+      let questionId = this.data.questionId
+      let ret = null
+      let opt = this.data.text[e.currentTarget.dataset.id]
+      if (e.currentTarget.dataset.id == this.data.rightIdx) {
+        ret = 1
+      } else {
+        ret = 0
       }
-    })
-
+      let data = {
+        appId: 11,
+        userId: app.globalData.userId,
+        questionId: questionId,
+        ret: ret,
+        opt: opt
+      } 
+      wx.request({
+        url: app.globalData.requestLink+'quiz/userQuizReport.htm',
+        data: data,
+        method: "post",
+        dataType: "json",
+        success(res) {
+          console.log(res)
+          let data = res.data.DATA
+          if (ret == 1) {
+            that.setData({
+              alert: true,
+              right: true,
+              dollar: data.questionCash,
+              time:10
+            })
+          } else {
+            that.setData({
+              alert: true,
+              wrong: true,
+              time:10
+            })
+          }
+         
+        }
+      })
+    } 
 
   },
   changeQ() {
@@ -316,6 +329,7 @@ Page({
         idx: idx,
         lastQuestionId: questionId
       })
+      this.timeLeft()
     }
   },
   bindGetUserInfo() {
@@ -360,21 +374,48 @@ Page({
   },
   timeLeft() {
     let that = this
-    Interval = setInterval(() => {
-      let time = that.data.time
+    clearInterval(this.data.Interval)  
+    this.data.Interval = setInterval(() => {
+      let time = that.data.time 
       time = time - 1
       that.setData({
         time: time
       })
       if (time < 0) {
-        clearInterval(Interval)
+        clearInterval(that.data.Interval)
         that.setData({
           time: 10
         })
-        that.changeQ()
-        that.timeLeft()
+        that.changeQ() 
       }
     }, 1000);
+  },
+  timeLeft2(){
+    let that = this
+    let bagIntervalTime=6000
+    if(new Date().getHours()>8){
+      bagIntervalTime=4000
+    }
+    clearInterval(this.data.bagInterval) 
+    this.data.bagInterval = setInterval(() => {  
+      let totalBag = that.data.totalBag  
+      totalBag = totalBag - 1
+      that.setData({  
+        totalBag: totalBag
+      })
+    }, bagIntervalTime); 
+    let dollarIntervalTime=12000
+    if(new Date().getHours()>8){
+      dollarIntervalTime=10000
+    }
+    clearInterval(this.data.dollarInterval) 
+    this.data.dollarInterval = setInterval(() => {  
+      let totalDollar = that.data.totalDollar 
+      totalDollar = totalDollar - 1 
+      that.setData({  
+        totalDollar: totalDollar
+      })
+    }, dollarIntervalTime);
   },
   ling(e) {
     let userId = app.globalData.userId
@@ -398,6 +439,7 @@ Page({
         that.getInfo()
         that.setData({
           opened: true,
+          renwu: true,
           url: "http://res.hodanet.com/upload/sy/20210019/18/newReward2.png",
           rookieCash: res.data.DATA.answerCash
         })
@@ -406,6 +448,11 @@ Page({
   } 
   },
   open() {
+    if(this.data.opened){
+      this.setData({
+        first: false
+      })
+    }else{
     let that = this
     let userId = app.globalData.userId
     let data = {
@@ -419,31 +466,31 @@ Page({
       method: "post",
       dataType: "json",
       success(res) {
-        console.log(res)
-        let cash = that.data.cash
-        cash = cash + res.data.DATA.rookieCash
-        let width = cash * 5
+        console.log(res) 
         that.setData({
           opened: true,
-          url: "http://res.hodanet.com/upload/sy/20210019/18/newReward2.png",
           rookieCash: res.data.DATA.rookieCash,
-          cash: cash,
-          width: width
+          url: "http://res.hodanet.com/upload/sy/20210019/18/newReward2.png"
         })
+        that.getInfo()
       }
-    })
-
+    }) 
+   
+  }
   },
   close(e) {
     this.setData({
       right: false,
-      alert: false
+      alert: false,
+      wrong:false,
+      cardAlert:false
     })
-    this.changeQ()
+     this.getInfo(1)  
   },
   close2(e) {
     this.setData({
       first: false,
+      renwu: false,
     })
   },
   tixian() {
@@ -453,10 +500,34 @@ Page({
     })
   },
   card() {
-    let card = this.data.card || 0
-    let successAnswer = this.data.num || 0
     wx.navigateTo({
-      url: "/pages/card/card?card=" + card + "&successAnswer=" + successAnswer
+      url: "/pages/card/card"
+    })
+    this.setData({
+      alert:false,
+      cardAlert:false
+    })
+  },
+  //获取rank
+  getUserWithdrawRank(){
+    let that=this
+    let data = {
+      openId: app.globalData.openId,
+      appId: 11,
+      userId:app.globalData.userId
+    }
+    wx.request({
+      url: app.globalData.requestLink+'user/getUserWithdrawRank.htm',
+      data: data,
+      method: "post",
+      dataType: "json",
+      success(res) {
+        console.log(res) 
+        that.setData({
+          rankList:res.data.DATA
+        })
+      }
     })
   }
+
 })

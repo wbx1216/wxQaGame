@@ -23,6 +23,12 @@
     </view>
   </view>
   <view class="button2" wx:if="{{!isClock}}" bindtap="checkIn">立刻签到</view>
-  <view class="button2" wx:else>已签到</view>
+  <view class="button2" wx:else  >已签到</view>
  </view>
+ <view class="alert" wx:if="{{alert}}">
+    <view style="margin:100rpx 0px;">恭喜获得{{card}}张答题卡</view>
+    <view style="line-height:100rpx;color:#2390f9;border-top:1px solid rgba(0,0,0,0.2)" bindtap="go">继续答题</view>
+   <image src="../../image/close.png" mode="widthFix" bindtap="close"></image>
+ </view>
+ <view class="cover"  wx:if="{{alert}}"></view>
 </view>

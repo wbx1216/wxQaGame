@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <scroll-view class="topAd" scroll-x="true">
+  <scroll-view class="topAd" scroll-x="true" wx:if="{{list.length>0}}">
     <view wx:for="{{list}}" class="item" wx:key="idx" wx:for-index="idx" wx:for-item="itemName">
       <image src="../../image/icon.png" mode="widthFix"></image>
       <view>成语小秀才</view>
@@ -38,9 +38,9 @@
       <view class="card">答题卡：{{card}}张</view>
       <view  bindtap="card" class="cardButton">领取答题卡</view>
     </view>
-    <view class="ad">
+    <!-- <view class="ad">
       <image src="../../image/bannerAd.png" style="width:95%;margin-left:2.5%" mode="widthFix"></image>
-    </view>
+    </view> -->
     <view class="renwu">
       <view class="title">累计答对题目：{{num}}题</view>
       <scroll-view class="renwuList" scroll-x="true">
@@ -57,35 +57,47 @@
         </view>
       </scroll-view>
     </view>
-    <view class="rank">
+    <view class="rank" >
       <image src="../../image/rankTitle.png" style="width:100%" mode="widthFix"></image>
       <view class="rankList">
         <view class="rankItem" wx:for="{{rankList}}" wx:key="idx" wx:for-index="idx" wx:for-item="item">
           <view class="flex">
             <image wx:if="{{idx<3}}" src="../../image/num{{idx+1}}.png" class="rankTitle" mode="widthFix"></image>
             <view class="rankTitle" wx:else>{{idx+1}}</view>
-            <image src="../../image/icon.png"  style="width:70rpx;" mode="widthFix"></image>
+            <image src="{{item.icon}}"  style="width:70rpx;border-radius:50%;height:70rpx" ></image>
             <view style="margin-left:20rpx;font-weight:550">
-              <view>{{item.name}}</view>
-              <view style="color:#fe4725;">累计答对{{item.num}}题</view>
+              <view>{{item.nickName}}</view>
+              <view style="color:#fe4725;">累计答对{{item.round}}题</view>
             </view>
           </view>
-          <view style="color:#fe4725">{{item.dollar}}元</view>
+          <view style="color:#fe4725">{{item.cash}}元</view>
         </view>
       </view>
     </view>
   </view>
 </view>
 <view class="newReward" wx:if="{{first}}" >
-  <view style="background-image:url({{url}})"   class="redBag"     bindtap="open"> 
-    <image src="../../image/close.png" mode="widthFix"  class="close" bindtap="close2"></image>
-    <view class="reward" wx:if="{{opened}}">{{rookieCash}}<text style="font-size:48rpx;font-weight:100">元</text></view>
+  <view style="background-image:url({{url}})"   class="redBag"       catchtap="open"> 
+    <image src="../../image/close.png" mode="widthFix"  class="close" catchtap="close2"></image>
+    <view class="reward" wx:if="{{opened}}">{{rookieCash}}<text style="font-size:48rpx;font-weight:550">元</text></view>
   </view>  
 </view>
-<view class="wrong" wx:if="{{alert}}" bindtap="close">
-  <view  wx:if="{{right}}" class="right">
-    <view class="dollar">{{dollar}}</view>
+<view class="newReward" wx:if="{{renwu}}" bindtap="close2" >
+  <view style="background-image:url(http://res.hodanet.com/upload/sy/20210019/18/newReward2.png)"   class="redBag" > 
+    <image src="../../image/close.png" mode="widthFix"  class="close" ></image>
+    <view class="reward">{{rookieCash}}<text style="font-size:48rpx;font-weight:550">元</text></view>
   </view>  
-  <image src="../../image/wrong.png" mode="widthFix" wx:else class="wrongImg"></image>
-  <image src="../../image/close.png" mode="widthFix"  class="close" ></image>
+</view>
+<view class="wrong" wx:if="{{alert}}">
+  <view  wx:if="{{right}}" class="rightAlert"  bindtap="close">
+    <view class="dollar">{{dollar}}</view>
+    <image src="../../image/close.png" mode="widthFix"  class="close" ></image>
+  </view>  
+  <view  wx:elif="{{wrong}}" class="wrongAlert"  bindtap="close">
+    <view class="dollar" wx:if="{{num<17}}">-0.1元现金</view>
+    <image src="../../image/close.png" mode="widthFix"  class="close" ></image>
+  </view>
+  <view  wx:elif="{{cardAlert}}" class="cardAlert"  bindtap="card"> 
+    <image src="../../image/close.png" mode="widthFix"  catchtap="close" class="close" ></image>
+  </view>  
 </view>  

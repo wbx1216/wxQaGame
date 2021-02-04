@@ -30,14 +30,26 @@ Page({
     //   button: "点击（0/2）"
     // }],
     successAnswer:0,
-    checkIn:0
+    clockDay:0,
+    isClock:false
   },
-  onLoad(e) {
-    let card=e.card||0
-    let successAnswer=e.successAnswer||0
+  onShow() { 
     let userId=app.globalData.userId 
     let that=this
-    let data={appId:11,userId:userId}
+    let data={appId:11,userId:userId,openId:app.globalData.openId}
+    wx.request({
+      url: app.globalData.requestLink+'user/getUserInfo.htm',
+      data: data,
+      method: "post",
+      dataType: "json",
+      success(res) {
+        console.log(res)
+        that.setData({
+          cardNum:res.data.DATA.card,
+          successAnswer:res.data.DATA.successAnswer
+        })
+      }
+    })
     wx.request({
       url: app.globalData.requestLink+'user/getUserClockData.htm',
       data: data,
@@ -45,10 +57,9 @@ Page({
       dataType: "json",
       success:function(res){ 
         console.log(res)
-        that.setData({
-          cardNum:card,
-          successAnswer:successAnswer,
-          checkIn:res.data.DATA.clockDay
+        that.setData({ 
+          clockDay:res.data.DATA.clockDay,
+          isClock:res.data.DATA.isClock
         })
       }
     })
@@ -58,13 +69,13 @@ Page({
   go(e) {
      if (e.currentTarget.dataset.idx == 1) {
       wx.navigateTo({
-        url: "/pages/checkIn/checkIn"
+        url: "/pages/checkIn/checkIn?clockDay="+this.data.clockDay+"&isClock="+this.data.isClock
       })
     }
   },
   onShareAppMessage(e){
     return {
-      title: "转发测试",
+      title: "每日答题赚钱",
       imageUrl: "",
       path: 'pages/index/index?masterId='+app.globalData.userId
     }

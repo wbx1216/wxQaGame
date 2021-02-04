@@ -21,5 +21,11 @@ Page({
     this.setData({
       rule:rule
     })
+  },
+  tixian(){
+    wx.showModal({ 
+      content: '可提现金额不足', 
+      showCancel:false,
+    })
   }
 })

@@ -1,4 +1,7 @@
 /**index.wxss**/
+.container{
+  padding-bottom:40rpx;
+}
 .topAd{ 
   font-size: 24rpx;
   color:#FFF; 
@@ -6,7 +9,7 @@
   height: 140rpx; 
   width: 95%;
   white-space: nowrap;
- padding:2.5%;
+  padding:2.5%;
 }
 .topAd .item{
   width: 150rpx;
@@ -18,8 +21,7 @@
   width:100rpx;
   margin:0 auto;
 }
-.userInfo{
-  height: 200rpx;
+.userInfo{ 
   padding:30rpx 0rpx;
   width: 95%;
   padding-left:2.5%;
@@ -48,7 +50,7 @@
     height: 50rpx; 
     line-height: 50rpx;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 20px;
     color:#FFF;
     font-size: 13px;
     position: relative;
@@ -145,12 +147,12 @@
     height: 50rpx; 
     line-height: 50rpx;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 20px;
     color:#FFF;
     font-size: 13px;
     position: absolute;
     bottom:60rpx;
-    right:80rpx;
+    right:100rpx;
 }
  
 .renwu{
@@ -248,6 +250,7 @@
   right:0;
   bottom:-100rpx; 
   margin:auto;
+  height: 60rpx;
 }
 .reward{ 
   color:#fe4725;
@@ -268,24 +271,57 @@
   position:fixed;
   background-color: rgba(0,0,0,0.7);
   top:0;
-  left:0;
+  left:0; 
 }
-.wrongImg{
-  width:560rpx;
+.wrongAlert{
+  width:620rpx;
+  height: 605rpx;
   display:block;
   position: absolute;
   left:0;
   right:0;
   margin:auto;
   bottom:0;
-  top:0;
-
+  top:0; 
+  background-image: url(http://res.hodanet.com/upload/sy/20210101/10/1612145936034.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat; 
 }
-.wrong .close{
+.cardAlert{
+  width:620rpx;
+  height: 605rpx;
+  display:block;
+  position: absolute;
+  left:0;
+  right:0;
+  margin:auto;
+  bottom:0;
+  top:0; 
+  background-image: url(http://res.hodanet.com/upload/sy/20210102/14/1612248019139.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat; 
+}
+.cardAlert .close{
   bottom:0px;
-  top:650rpx;
+  top:700rpx;
 }
-.right{
+.wrongAlert .close{
+  bottom:0px;
+  top:700rpx;
+}
+
+.wrongAlert .dollar{
+  font-size: 32rpx;
+  color:#fe4725; 
+  margin-top: 380rpx;
+  text-align: center;
+  width:621rpx;
+}
+.rightAlert .close{
+  bottom:0px;
+  top:750rpx;
+}
+.rightAlert{
   width:621rpx;
   display:block;
   position: absolute;
@@ -299,7 +335,7 @@
   margin:auto;
   background-image: url(http://res.hodanet.com/upload/sy/20210027/16/1611735866340.png);
 }
-.right .dollar{
+.rightAlert .dollar{
   font-size: 46rpx;
   color:#fe4725;
   margin-left: 20rpx;

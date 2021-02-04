@@ -22,7 +22,7 @@
             <view class="des">无门槛</view>
           </view>
         </view> 
-        <view class="button"> 提现</view>
+        <view class="button" bindtap="tixian"> 提现</view>
       </view>
     </block>
    </view> 

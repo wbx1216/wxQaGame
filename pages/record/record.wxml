@@ -1,10 +1,14 @@
- <view class="list">
+<scroll-view class="list" scroll-y="true" bindscrolltolower="scroll" lower-threshold="100" style="height:{{height}}px" >
   <view class="item" wx:for="{{list}}" wx:key="idx" wx:for-index="idx" wx:for-item="item">
     <view>
-      <view class="name">{{item.name}}</view>
+      <view class="name" wx:if="{{item.type==1}}">答题正确</view>
+      <view class="name" wx:elif="{{item.type==2}}">答题错误</view>
+      <view class="name" wx:elif="{{item.type==5}}">系统红包</view>
       <view class="time">{{item.time}}</view>
     </view>
-    <view  class="num">+{{item.num}}</view>
+    <view  class="num" wx:if="{{item.type==1}}">+{{item.cash}}</view>
+    <view  class="num wrong" wx:elif="{{item.type==2}}">{{item.cash}}</view>
+    <view  class="num" wx:elif="{{item.type==5}}">+{{item.cash}}</view>
   </view>
- </view>
+ </scroll-view>
  
